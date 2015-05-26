@@ -36,6 +36,12 @@ typedef void effect_cb(GContext* ctx, GRect position, void* param);
 // Added by Yuriy Galanter
 effect_cb effect_invert;
 
+// Invert only black and white
+effect_cb effect_invert_bw_only;
+
+// Invert brightness of colors (retains hue, does not apply to black and white)
+effect_cb effect_invert_brightness;
+
 // vertical mirror effect.
 // Added by Yuriy Galanter
 effect_cb effect_mirror_vertical;
