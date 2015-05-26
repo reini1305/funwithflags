@@ -10,6 +10,8 @@ To use the library place the source files in your SRC directory and add <code>#i
 Currently supported effects:
 <ul>
 <li>Invert</li>
+<li>Invert b/w only</li>
+<li>Invert brightness, preserve hue</li>
 <li>Vertical Mirror</li>
 <li>Horizontal Mirror</li>
 <li>Rotate 90 degrees (counter- or clock-wise)</li>
@@ -48,7 +50,11 @@ Currently supported effects:
 <h3>Usage</h3>
 
 <code>effect_layer_add_effect(my_effect_layer, effect_invert, NULL);</code> - adds inverter effect
- 
+
+<code>effect_layer_add_effect(my_effect_layer, effect_invert_bw_only, NULL);</code> - Inverts pixels within the layer bounds if the pixels equal GColorBlack or GColorWhite. All other pixels are left untouched allowing for 2.x style black and white themes with splashes of color added for Pebble Times.
+
+<code>effect_layer_add_effect(my_effect_layer, effect_invert_brightness, NULL);</code> - Inverts the perceived brightness of pixels within the layer bounds, except for pixels that equal GColorBlack and GColorWhite (can be used with effect_invert_bw_only to invert black and white pixels). The hue of the pixels is left mostly intact and was initially intended to maintain good contrast of color in cases where an app/watchface has both a light and dark mode with color UI elements without having to have multiple sets of color resources/coding. Works best when color elements are all designed to have good contrast on either a light or dark background and then the effect layer is hidden for that background and shown for the opposite background.
+
 <code>effect_layer_add_effect(my_effect_layer, effect_mirror_vertical, NULL);</code> - adds vertical mirror effect 
 
 <code>effect_layer_add_effect(my_effect_layer, effect_mirror_horizontal, NULL);</code> - adds horizontal mirror effect
