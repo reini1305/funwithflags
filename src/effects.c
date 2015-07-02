@@ -138,7 +138,7 @@ void effect_invert(GContext* ctx,  GRect position, void* param) {
   for (int y = 0; y < position.size.h; y++)
      for (int x = 0; x < position.size.w; x++)
         #ifdef PBL_COLOR // on Basalt simple doing NOT on entire returned byte/pixel
-          set_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x, ~get_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x));
+          set_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x, (~get_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x))|11000000);
         #else // on Aplite since only 1 and 0 is returning, doing "not" by 1 - pixel
           set_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x, 1 - get_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x));
         #endif
