@@ -147,6 +147,54 @@ void effect_invert(GContext* ctx,  GRect position, void* param) {
           
 }
 
+// colorize effect - given a target color, replace it with a new color
+// Added by Martin Norland (@cynorg)
+// Parameter:  GColor firstColor, GColor secondColor
+void effect_colorize(GContext* ctx,  GRect position, void* param) {
+#ifdef PBL_COLOR // only logical to do anything on Basalt - otherwise you're just ... drawing a black|white GRect
+  //capturing framebuffer bitmap
+  GBitmap *fb = graphics_capture_frame_buffer(ctx);
+  uint8_t *bitmap_data = gbitmap_get_data(fb);
+  int bytes_per_row = gbitmap_get_bytes_per_row(fb);
+  EffectColorpair *paint = (EffectColorpair *)param;
+
+  for (int y = 0; y < position.size.h; y++){
+     for (int x = 0; x < position.size.w; x++){
+        if (gcolor_equal((GColor)get_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x), paint->firstColor)){
+           set_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x, (uint8_t)paint->secondColor.argb);
+        }
+     }
+  graphics_release_frame_buffer(ctx, fb);
+  }
+#endif
+}
+
+
+// colorswap effect - swaps two colors in a given area
+// Added by Martin Norland (@cynorg)
+// Parameter:  GColor firstColor, GColor secondColor
+void effect_colorswap(GContext* ctx,  GRect position, void* param) {
+#ifdef PBL_COLOR // only logical to do anything on Basalt - otherwise you're just ... doing an invert
+  //capturing framebuffer bitmap
+  GBitmap *fb = graphics_capture_frame_buffer(ctx);
+  uint8_t *bitmap_data = gbitmap_get_data(fb);
+  int bytes_per_row = gbitmap_get_bytes_per_row(fb);
+  EffectColorpair *swap = (EffectColorpair *)param;
+  GColor pixel;
+
+  for (int y = 0; y < position.size.h; y++){
+     for (int x = 0; x < position.size.w; x++){
+          pixel.argb = get_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x);
+          if (gcolor_equal(pixel, swap->firstColor))
+            set_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x, swap->secondColor.argb);
+          else if (gcolor_equal(pixel, swap->secondColor))
+            set_pixel(bitmap_data, bytes_per_row, y + position.origin.y, x + position.origin.x, swap->firstColor.argb);
+     }
+  graphics_release_frame_buffer(ctx, fb);
+  }
+#endif
+}
+
 // invert black and white only (leaves all other colors intact).
 void effect_invert_bw_only(GContext* ctx,  GRect position, void* param) {
   //capturing framebuffer bitmap
