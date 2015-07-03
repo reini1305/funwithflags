@@ -104,7 +104,7 @@ You can specify option in the parameter <code>shadow.option = 1;</code> to displ
 typedef struct {
   GColor firstColor;  // first color (target for colorize, one of set in colorswap)
   GColor secondColor; // second color (new color for colorize, other of set in colorswap)
-} EffectOffset;
+} EffectColorpair;
 ```
 For example if you want to take your black and white watchface, and make it black and green, your parameter would be:
 ```c
