@@ -106,7 +106,7 @@ typedef struct {
   GColor secondColor; // second color (new color for colorize, other of set in colorswap)
 } EffectColorpair;
 ```
-For example if you want to take your black and white watchface, and make it black and green, your parameter would be:
+For example if you want to take your black and white watchface, and make it black and green, your parameter for the above call would be:
 ```c
 EffectColorpair colorpair;
 colorpair.firstColor = GColorWhite;
