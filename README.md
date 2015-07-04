@@ -22,6 +22,8 @@ Currently supported effects:
 <li>FPS</li>
 <li>Shadow</li>
 <li>Outline</li>
+<li>Colorize (replace a color with another)</li>
+<li>Color Swap</li>
 </ul>
 <hr>
 <h3>Functions</h3>
@@ -45,6 +47,8 @@ Currently supported effects:
 <li>effect_fps</li>
 <li>effect_shadow</li>
 <li>effect_outline</li>
+<li>effect_colorize</li>
+<li>effect_colorswap</li>
 </ul>
 
 <h3>Usage</h3>
@@ -94,6 +98,22 @@ shadow.offset_x = 2;
 You can specify option in the parameter <code>shadow.option = 1;</code> to display long contiuous shadow (to use this on Aplite you also need to specify <code>shadow.aplite_visited</code> array to keep track of set pixels. See <a href="Color Shadow">https://github.com/ygalanter/Color_Shadow/</a> watchface for example implementation.
 
 <code>effect_layer_add_effect(my_effect_layer, effect_outline, &shadow);</code> - Similar to the Shadow effect, however the color is added in all directions.
+
+<code>effect_layer_add_effect(my_effect_layer, effect_colorize, &colorpair);</code> - Replaces the first color with the second, useful for 'painting' a b&w watchface. <code>colorpair</code> is a parameter of type <code>EffectColorpair</code>:
+```c
+typedef struct {
+  GColor firstColor;  // first color (target for colorize, one of set in colorswap)
+  GColor secondColor; // second color (new color for colorize, other of set in colorswap)
+} EffectColorpair;
+```
+For example if you want to take your black and white watchface, and make it black and green, your parameter for the above call would be:
+```c
+EffectColorpair colorpair;
+colorpair.firstColor = GColorWhite;
+colorpair.secondColor = GColorGreen;
+```
+
+<code>effect_layer_add_effect(my_effect_layer, effect_colorswap, &colorpair);</code> - Similar to the Colorize effect, but also replaces the second color with the first, effectively like a targeted invert (useful for when you have two colors and just want them flipped, but they're either not a direct invert, or you don't want to affect other colors)
 
 <h3>Extentions</h3>
 
