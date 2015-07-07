@@ -65,6 +65,11 @@ Layer* effect_layer_get_layer(EffectLayer *effect_layer){
   return effect_layer->layer;
 }
 
+//sets frame for effect layer
+void effect_layer_set_frame(EffectLayer *effect_layer, GRect frame) {
+  layer_set_frame(effect_layer->layer, frame);
+}
+
 //sets effect for the layer
 void effect_layer_add_effect(EffectLayer *effect_layer, effect_cb* effect, void* param) {
   if(effect_layer->next_effect<MAX_EFFECTS) {

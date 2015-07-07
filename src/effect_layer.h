@@ -26,6 +26,9 @@ void effect_layer_add_effect(EffectLayer *effect_layer, effect_cb* effect, void*
 //gets layer
 Layer* effect_layer_get_layer(EffectLayer *effect_layer);
 
+//sets effect layer frame
+void effect_layer_set_frame(EffectLayer *effect_layer, GRect frame);
+
 // Recreate inverter_layer for BASALT
 #ifndef PBL_PLATFORM_APLITE
   #define InverterLayer EffectLayer
