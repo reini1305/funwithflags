@@ -76,11 +76,20 @@ void effect_layer_set_frame(EffectLayer *effect_layer, GRect frame) {
   layer_set_frame(effect_layer->layer, frame);
 }
 
-//sets effect for the layer
+//adds effect to the layer
 void effect_layer_add_effect(EffectLayer *effect_layer, effect_cb* effect, void* param) {
-  if(effect_layer->next_effect<MAX_EFFECTS) {
+  if(effect_layer->next_effect < MAX_EFFECTS) {
     effect_layer->effects[effect_layer->next_effect] = effect;
     effect_layer->params[effect_layer->next_effect] = param;  
     ++effect_layer->next_effect;
+  }
+}
+
+//removes last added effect
+void effect_layer_remove_effect(EffectLayer *effect_layer) {
+  if(effect_layer->next_effect > 0) {
+    effect_layer->effects[effect_layer->next_effect - 1] = NULL;
+    effect_layer->params[effect_layer->next_effect - 1] = NULL;  
+    --effect_layer->next_effect;
   }
 }

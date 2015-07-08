@@ -20,6 +20,26 @@ void on_animation_stopped(Animation *anim, bool finished, void *ctx)
 
 void next_anim() {
   
+  //testing adding/removing effect on the fly to existing layer
+  switch (anim_count) {
+    case 0:
+      effect_layer_add_effect(effect_layer, effect_invert, NULL);
+      break;
+    case 1:
+      effect_layer_remove_effect(effect_layer);
+      effect_layer_add_effect(effect_layer, effect_rotate_90_degrees, (void *)true);
+      break;
+    case 2:
+      effect_layer_remove_effect(effect_layer);
+      effect_layer_add_effect(effect_layer, effect_mirror_vertical, NULL);
+      break;
+    case 3:
+      effect_layer_remove_effect(effect_layer);
+      break;
+  
+  }
+  
+  
   anim_count++;
   if (anim_count == 4)  anim_count = 0; // if we finished all animation points - start from the beginning
   
@@ -82,8 +102,9 @@ void handle_init(void) {
   mask.bitmap_background = gbitmap_create_with_resource(RESOURCE_ID_MASK_BG);
  
   
-  // adding shadow effect
+  // adding mask effect
   effect_layer_add_effect(effect_layer, effect_mask, &mask);
+
   
   layer_add_child(window_get_root_layer(my_window), effect_layer_get_layer(effect_layer));
   

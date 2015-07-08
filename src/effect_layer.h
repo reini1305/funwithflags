@@ -20,8 +20,11 @@ EffectLayer* effect_layer_create(GRect frame);
 //destroys effect layer
 void effect_layer_destroy(EffectLayer *effect_layer);
 
-//sets effect for the layer
+//adds effect for the layer
 void effect_layer_add_effect(EffectLayer *effect_layer, effect_cb* effect, void* param);
+
+//removes last added effect
+void effect_layer_remove_effect(EffectLayer *effect_layer);
 
 //gets layer
 Layer* effect_layer_get_layer(EffectLayer *effect_layer);
