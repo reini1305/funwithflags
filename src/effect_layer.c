@@ -57,7 +57,13 @@ EffectLayer* effect_layer_create(GRect frame) {
 
 //destroy effect layer
 void effect_layer_destroy(EffectLayer *effect_layer) {
-  layer_destroy(effect_layer->layer);
+  // precaution
+  if (effect_layer != NULL && effect_layer->layer != NULL) {
+    layer_destroy(effect_layer->layer);  
+    effect_layer->layer = NULL;
+    effect_layer = NULL;
+  }
+  
 }
 
 // returns base layer

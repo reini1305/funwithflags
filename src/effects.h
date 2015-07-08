@@ -1,5 +1,12 @@
 #pragma once
 #include <pebble.h>  
+
+// used to pass bimap info to get/set pixel accurately  
+typedef struct {
+   uint8_t *bitmap_data;
+   int bytes_per_row;
+   GBitmapFormat bitmap_format;
+}  BitmapInfo;
   
 // structure of mask for masking effects
 typedef struct {

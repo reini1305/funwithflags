@@ -6,7 +6,7 @@ TextLayer *text_layer1, *text_layer2, *text_layer3, *text_layer4;
 PropertyAnimation *anim;
 
 EffectLayer* effect_layer;
-EffectOffset outline;
+EffectMask mask;
 
 GRect anim_finish[4] = {{{75,2}, {68,80}}, {{75,87}, {68,80}}, {{2,87}, {68,80}}, {{2,2},{68,80}}};
 int anim_count = -1;
@@ -35,7 +35,7 @@ void next_anim() {
   animation_set_handlers((Animation*) anim, handlers, NULL);
     
   animation_set_curve((Animation*) anim, AnimationCurveLinear);
-  animation_set_duration((Animation*) anim, 1500);
+  animation_set_duration((Animation*) anim, 2500);
   animation_set_delay((Animation*) anim, 0);
   animation_schedule((Animation*) anim);
   
@@ -60,42 +60,35 @@ void handle_init(void) {
   window_stack_push(my_window, true);
   
   //creating colorful field (not doing this while testing MASK effect)
-  #ifdef PBL_COLOR
-    create_color_layer(text_layer1, GRect(0,0,72,84), "11", GColorChromeYellow, GColorBlueMoon);
-    create_color_layer(text_layer1, GRect(73,0, 72,84), "22", GColorChromeYellow, GColorBlueMoon);
-    create_color_layer(text_layer1, GRect(0,85,72,84), "33", GColorChromeYellow, GColorBlueMoon);
-    create_color_layer(text_layer1, GRect(73,85,72,84), "44", GColorChromeYellow, GColorBlueMoon);
-  #else
-    create_color_layer(text_layer1, GRect(0,0,72,84), "11",  GColorWhite, GColorBlack);
-    create_color_layer(text_layer1, GRect(73,0, 72,84), "22", GColorWhite, GColorBlack);
-    create_color_layer(text_layer1, GRect(0,85,72,84), "44", GColorWhite, GColorBlack);
-    create_color_layer(text_layer1, GRect(73,85,72,84), "66", GColorWhite, GColorBlack);
-  #endif 
+//   #ifdef PBL_COLOR
+//     create_color_layer(text_layer1, GRect(0,0,72,84), "11", GColorChromeYellow, GColorBlueMoon);
+//     create_color_layer(text_layer1, GRect(73,0, 72,84), "22", GColorChromeYellow, GColorBlueMoon);
+//     create_color_layer(text_layer1, GRect(0,85,72,84), "33", GColorChromeYellow, GColorBlueMoon);
+//     create_color_layer(text_layer1, GRect(73,85,72,84), "44", GColorChromeYellow, GColorBlueMoon);
+//   #else
+//     create_color_layer(text_layer1, GRect(0,0,72,84), "11",  GColorWhite, GColorBlack);
+//     create_color_layer(text_layer1, GRect(73,0, 72,84), "22", GColorWhite, GColorBlack);
+//     create_color_layer(text_layer1, GRect(0,85,72,84), "44", GColorWhite, GColorBlack);
+//     create_color_layer(text_layer1, GRect(73,85,72,84), "66", GColorWhite, GColorBlack);
+//   #endif 
   
   //creating effect layer
   effect_layer = effect_layer_create(GRect(73,85,70,82));
-  
-  //creating outline param
-  #ifdef PBL_COLOR
-    outline.orig_color = GColorChromeYellow;
-    outline.offset_color = GColorRed;
-  #else
-    outline.orig_color = GColorWhite;
-    outline.offset_color = GColorBlack;
-  #endif
-  
-  outline.offset_x = 50;
-  outline.offset_y = 50;
-  
-  outline.option = 1;
+   
+  mask.text = NULL;
+  mask.bitmap_mask = gbitmap_create_with_resource(RESOURCE_ID_MASK_SHAPE);
+  mask.mask_color = GColorWhite;
+  mask.background_color = GColorClear;
+  mask.bitmap_background = gbitmap_create_with_resource(RESOURCE_ID_MASK_BG);
+ 
   
   // adding shadow effect
-  effect_layer_add_effect(effect_layer, effect_shadow, &outline);
+  effect_layer_add_effect(effect_layer, effect_mask, &mask);
   
   layer_add_child(window_get_root_layer(my_window), effect_layer_get_layer(effect_layer));
   
   //begin animation
-  //next_anim();
+  next_anim();
   
 }
 
