@@ -53,6 +53,8 @@ Currently supported effects:
 <li>effect_colorswap</li>
 </ul>
 
+<code>void effect_layer_remove_effect(EffectLayer *effect_layer)</code> - removes last added effect from the layer. parameters is effect layer that you created previously.
+
 <h3>Usage</h3>
 
 <code>effect_layer_add_effect(my_effect_layer, effect_invert, NULL);</code> - adds inverter effect
