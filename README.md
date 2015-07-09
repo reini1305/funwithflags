@@ -34,6 +34,8 @@ Currently supported effects:
 
 <code>Layer* effect_layer_get_layer(EffectLayer *effect_layer)</code> - gets underlying Layer of the effect layer for basic manipulations such as addin to Window root layer or layer's changing frame or bounds
 
+<code>Layer* effect_layer_set_frame(EffectLayer *effect_layer, GRect frame)</code> - shortcut to set the frame of the effect layer.
+
 <code>void effect_layer_add_effect(EffectLayer *effect_layer, effect_cb* effect, void* param)</code> - adds effect to the layer. Parameters are - effect layer that you created previously, name of the function to perform effect, optional data to pass to the effect. User can call this function multiple times on the same effect layer, adding multiple effects, so there's no need to create multiple layers. At this time library has following built in effect functions to represent the effects listed above:
 <ul>
 <li>effect_invert</li>
