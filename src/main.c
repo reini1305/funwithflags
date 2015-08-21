@@ -8,6 +8,7 @@ PropertyAnimation *anim;
 EffectLayer* effect_layer;
 EffectMask mask;
 
+
 GRect anim_finish[4] = {{{75,2}, {68,80}}, {{75,87}, {68,80}}, {{2,87}, {68,80}}, {{2,2},{68,80}}};
 int anim_count = -1;
 
@@ -21,23 +22,23 @@ void on_animation_stopped(Animation *anim, bool finished, void *ctx)
 void next_anim() {
   
   //testing adding/removing effect on the fly to existing layer
-  switch (anim_count) {
-    case 0:
-      effect_layer_add_effect(effect_layer, effect_invert, NULL);
-      break;
-    case 1:
-      effect_layer_remove_effect(effect_layer);
-      effect_layer_add_effect(effect_layer, effect_rotate_90_degrees, (void *)true);
-      break;
-    case 2:
-      effect_layer_remove_effect(effect_layer);
-      effect_layer_add_effect(effect_layer, effect_mirror_vertical, NULL);
-      break;
-    case 3:
-      effect_layer_remove_effect(effect_layer);
-      break;
+//   switch (anim_count) {
+//     case 0:
+//       effect_layer_add_effect(effect_layer, effect_invert, NULL);
+//       break;
+//     case 1:
+//       effect_layer_remove_effect(effect_layer);
+//       effect_layer_add_effect(effect_layer, effect_rotate_90_degrees, (void *)true);
+//       break;
+//     case 2:
+//       effect_layer_remove_effect(effect_layer);
+//       effect_layer_add_effect(effect_layer, effect_mirror_vertical, NULL);
+//       break;
+//     case 3:
+//       effect_layer_remove_effect(effect_layer);
+//       break;
   
-  }
+//   }
   
   
   anim_count++;
@@ -94,10 +95,25 @@ void handle_init(void) {
   
   //creating effect layer
   effect_layer = effect_layer_create(GRect(73,85,70,82));
+  
+  
    
   mask.text = NULL;
   mask.bitmap_mask = gbitmap_create_with_resource(RESOURCE_ID_MASK_SHAPE);
-  mask.mask_color = GColorWhite;
+
+  #ifdef PBL_COLOR
+    mask.mask_colors = malloc(sizeof(GColor)*4);
+    mask.mask_colors[0] = GColorWhite;
+    mask.mask_colors[1] = GColorBlue;
+    mask.mask_colors[2] = GColorRed;
+    mask.mask_colors[3] = GColorClear;
+  #else
+    mask.mask_colors = malloc(sizeof(GColor)*2);
+    mask.mask_colors[0] = GColorWhite;
+    mask.mask_colors[1] = GColorClear;
+  #endif
+  
+  
   mask.background_color = GColorClear;
   mask.bitmap_background = gbitmap_create_with_resource(RESOURCE_ID_MASK_BG);
  
