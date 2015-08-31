@@ -78,10 +78,10 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
           #else
-            if (get_pixel(bitmap_info,  temp_y, temp_x) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
+            if (((visited[temp_y*20 + temp_x/8] >> (temp_x % 8)) & 1) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
               if (temp_pixel != skip_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color); // if pixel isn't of original color - set it
               draw_color = 1 - draw_color; // revers pixel for "lined" effect
-              set_pixel(bitmap_info, temp_y, temp_x, 1); //mark pixel as set
+              visited[temp_y*20 + temp_x/8] ^= (-1 ^ visited[temp_y*20 + temp_x/8]) & (1 << (temp_x % 8)); // in Aplite - set the bit
             }
           #endif
         }
@@ -97,10 +97,10 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
           #else
-            if (get_pixel(bitmap_info,  temp_y, temp_x) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
+            if (((visited[temp_y*20 + temp_x/8] >> (temp_x % 8)) & 1) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
               if (temp_pixel != skip_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color); // if pixel isn't of original color - set it
               draw_color = 1 - draw_color; // revers pixel for "lined" effect
-              set_pixel(bitmap_info, temp_y, temp_x, 1); //mark pixel as set
+              visited[temp_y*20 + temp_x/8] ^= (-1 ^ visited[temp_y*20 + temp_x/8]) & (1 << (temp_x % 8));
             }
           #endif
       }
@@ -118,10 +118,10 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
           #else
-            if (get_pixel(bitmap_info,  temp_y, temp_x) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
+            if (((visited[temp_y*20 + temp_x/8] >> (temp_x % 8)) & 1) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
               if (temp_pixel != skip_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color); // if pixel isn't of original color - set it
               draw_color = 1 - draw_color; // revers pixel for "lined" effect
-              set_pixel(bitmap_info, temp_y, temp_x, 1); //mark pixel as set
+              visited[temp_y*20 + temp_x/8] ^= (-1 ^ visited[temp_y*20 + temp_x/8]) & (1 << (temp_x % 8));
             }
           #endif
       }  
@@ -137,10 +137,10 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
           #else
-            if (get_pixel(bitmap_info,  temp_y, temp_x) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
+            if (((visited[temp_y*20 + temp_x/8] >> (temp_x % 8)) & 1) != 1) { // for Aplite first check if pixel isn't already marked as set in user-defined array
               if (temp_pixel != skip_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color); // if pixel isn't of original color - set it
               draw_color = 1 - draw_color; // revers pixel for "lined" effect
-              set_pixel(bitmap_info, temp_y, temp_x, 1); //mark pixel as set
+              visited[temp_y*20 + temp_x/8] ^= (-1 ^ visited[temp_y*20 + temp_x/8]) & (1 << (temp_x % 8));
             }
           #endif
     }  
