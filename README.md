@@ -99,7 +99,7 @@ shadow.offset_color = GColorYellow;
 shadow.offset_y = 2;  
 shadow.offset_x = 2;
 ```
-You can specify option in the parameter <code>shadow.option = 1;</code> to display long contiuous shadow (to use this on Aplite you also need to specify <code>shadow.aplite_visited</code> array to keep track of set pixels. See <a href="Color Shadow">https://github.com/ygalanter/Color_Shadow/</a> watchface for example implementation.
+You can specify option in the parameter <code>shadow.option = 1;</code> to display long continuous shadow (to use this on Aplite you also need to specify <code>shadow.aplite_visited</code> array to keep track of set pixels. See <a href="Color Shadow">https://github.com/ygalanter/Color_Shadow/</a> watchface for example implementation.
 
 <code>effect_layer_add_effect(my_effect_layer, effect_outline, &shadow);</code> - Similar to the Shadow effect, however the color is added in all directions.
 
@@ -119,13 +119,13 @@ colorpair.secondColor = GColorGreen;
 
 <code>effect_layer_add_effect(my_effect_layer, effect_colorswap, &colorpair);</code> - Similar to the Colorize effect, but also replaces the second color with the first, effectively like a targeted invert (useful for when you have two colors and just want them flipped, but they're either not a direct invert, or you don't want to affect other colors)
 
-<h3>Extentions</h3>
+<h3>Extensions</h3>
 
 Library is user-extendable, if you define your function in format
 
 <code>void effect_my_own_cool_effect(GContext* ctx, GRect position, void* param) { /* cool effect code */ }</code>
 
-you can add it to EffectLayer in maner similar to above:
+you can add it to EffectLayer in manner similar to above:
 
 <code>effect_layer_add_effect(my_effect_layer, effect_my_own_cool_effect, param);</code> 
 
