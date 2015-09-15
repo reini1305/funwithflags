@@ -56,22 +56,22 @@ uint8_t PalColor(uint8_t in_color, GBitmapFormat in_format, GBitmapFormat out_fo
 // Small Display (256x256) resolution.
 // based on algorythm by Po-Han Lin at http://www.edepot.com
 void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw_color, uint8_t skip_color, uint8_t *visited) {
-  bool yLonger = false;	int shortLen=y2-y; int longLen=x2-x;
+  bool yLonger = false; int shortLen=y2-y; int longLen=x2-x;
   uint8_t temp_pixel;  int temp_x, temp_y;
   
-	if (abs(shortLen)>abs(longLen)) {
-		int swap=shortLen;
-		shortLen=longLen;	longLen=swap;	yLonger=true;
-	}
+  if (abs(shortLen)>abs(longLen)) {
+    int swap=shortLen;
+    shortLen=longLen; longLen=swap; yLonger=true;
+  }
   
-	int decInc;
-	if (longLen==0) decInc=0;
-	else decInc = (shortLen << 8) / longLen;
+  int decInc;
+  if (longLen==0) decInc=0;
+  else decInc = (shortLen << 8) / longLen;
 
-	if (yLonger) {
-		if (longLen>0) {
-			longLen+=y;
-			for (int j=0x80+(x<<8);y<=longLen;++y) {
+  if (yLonger) {
+    if (longLen>0) {
+      longLen+=y;
+      for (int j=0x80+(x<<8);y<=longLen;++y) {
         temp_y = y; temp_x = j >> 8;
         if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
           temp_pixel = get_pixel(bitmap_info,  temp_y, temp_x);
@@ -85,12 +85,12 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
             }
           #endif
         }
-				j+=decInc;
-			}
-			return;
-		}
-		longLen+=y;
-		for (int j=0x80+(x<<8);y>=longLen;--y) {
+        j+=decInc;
+      }
+      return;
+    }
+    longLen+=y;
+    for (int j=0x80+(x<<8);y>=longLen;--y) {
       temp_y = y; temp_x = j >> 8;
       if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
         temp_pixel = get_pixel(bitmap_info,  temp_y, temp_x);
@@ -104,14 +104,14 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
             }
           #endif
       }
-			j-=decInc;
-		}
-		return;	
-	}
+      j-=decInc;
+    }
+    return; 
+  }
 
-	if (longLen>0) {
-		longLen+=x;
-		for (int j=0x80+(y<<8);x<=longLen;++x) {
+  if (longLen>0) {
+    longLen+=x;
+    for (int j=0x80+(y<<8);x<=longLen;++x) {
       temp_y = j >> 8; temp_x =  x;
       if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
         temp_pixel = get_pixel(bitmap_info, temp_y, temp_x);
@@ -125,13 +125,13 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
             }
           #endif
       }  
-			j+=decInc;
-		}
-		return;
-	}
-	longLen+=x;
-	for (int j=0x80+(y<<8);x>=longLen;--x) {
-	  temp_y = j >> 8; temp_x =  x;
+      j+=decInc;
+    }
+    return;
+  }
+  longLen+=x;
+  for (int j=0x80+(y<<8);x>=longLen;--x) {
+    temp_y = j >> 8; temp_x =  x;
     if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
       temp_pixel = get_pixel(bitmap_info, temp_y, temp_x);
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
@@ -144,8 +144,8 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
             }
           #endif
     }  
-		j-=decInc;
-	}
+    j-=decInc;
+  }
 
 }
 
@@ -727,8 +727,8 @@ void effect_shadow(GContext* ctx, GRect position, void* param) {
 
 void effect_outline(GContext* ctx, GRect position, void* param) {
   GColor temp_pixel;  
-  int outlinex[4];
-  int outliney[4];
+  int outlinex[8];
+  int outliney[8];
   EffectOffset *outline = (EffectOffset *)param;
   
    //capturing framebuffer bitmap
@@ -755,9 +755,17 @@ void effect_outline(GContext* ctx, GRect position, void* param) {
           outliney[2] = y + position.origin.y + outline->offset_y;
           outlinex[3] = x + position.origin.x + outline->offset_x;
           outliney[3] = y + position.origin.y - outline->offset_y;
+          outlinex[4] = x + position.origin.x;
+          outliney[4] = y + position.origin.y - outline->offset_y;
+          outlinex[5] = x + position.origin.x;
+          outliney[5] = y + position.origin.y + outline->offset_y;
+          outlinex[6] = x + position.origin.x - outline->offset_x;
+          outliney[6] = y + position.origin.y;
+          outlinex[7] = x + position.origin.x + outline->offset_x;
+          outliney[7] = y + position.origin.y;
           
          
-          for (int i = 0; i < 4; i++) {
+          for (int i = 0; i < 8; i++) {
             // TODO: centralize the constants
             if (outlinex[i] >= 0 && outlinex[i] <=144 && outliney[i] >= 0 && outliney[i] <= 168) {
               temp_pixel = (GColor)get_pixel(bitmap_info, outliney[i], outlinex[i]);
