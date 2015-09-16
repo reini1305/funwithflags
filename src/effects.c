@@ -742,44 +742,38 @@ void effect_outline(GContext* ctx, GRect position, void* param) {
   
   //loop through pixels from framebuffer
   for (int y = 0; y < position.size.h; y++)
-     for (int x = 0; x < position.size.w; x++) {
-       temp_pixel = (GColor)get_pixel(bitmap_info, y + position.origin.y, x + position.origin.x);
+    for (int x = 0; x < position.size.w; x++) {
+      for (int a = 0; a <= outline->offset_x; a++) 
+        for (int b = 0; b <= outline->offset_y; b++) {
+  
+          temp_pixel = (GColor)get_pixel(bitmap_info, y + position.origin.y, x + position.origin.x);
        
-       if (gcolor_equal(temp_pixel, outline->orig_color)) {
-          // TODO: there's probably a more efficient way to do this
-          outlinex[0] = x + position.origin.x - outline->offset_x;
-          outliney[0] = y + position.origin.y - outline->offset_y;
-          outlinex[1] = x + position.origin.x + outline->offset_x;
-          outliney[1] = y + position.origin.y + outline->offset_y;
-          outlinex[2] = x + position.origin.x - outline->offset_x;
-          outliney[2] = y + position.origin.y + outline->offset_y;
-          outlinex[3] = x + position.origin.x + outline->offset_x;
-          outliney[3] = y + position.origin.y - outline->offset_y;
-          outlinex[4] = x + position.origin.x;
-          outliney[4] = y + position.origin.y - outline->offset_y;
-          outlinex[5] = x + position.origin.x;
-          outliney[5] = y + position.origin.y + outline->offset_y;
-          outlinex[6] = x + position.origin.x - outline->offset_x;
-          outliney[6] = y + position.origin.y;
-          outlinex[7] = x + position.origin.x + outline->offset_x;
-          outliney[7] = y + position.origin.y;
-          
+          if (gcolor_equal(temp_pixel, outline->orig_color)) {
+            outlinex[0] = x + position.origin.x - a;
+            outliney[0] = y + position.origin.y - b;
+            outlinex[1] = x + position.origin.x + a;
+            outliney[1] = y + position.origin.y + b;
+            outlinex[2] = x + position.origin.x - a;
+            outliney[2] = y + position.origin.y + b;
+            outlinex[3] = x + position.origin.x + a;
+            outliney[3] = y + position.origin.y - b;
          
-          for (int i = 0; i < 8; i++) {
-            // TODO: centralize the constants
-            if (outlinex[i] >= 0 && outlinex[i] <=144 && outliney[i] >= 0 && outliney[i] <= 168) {
-              temp_pixel = (GColor)get_pixel(bitmap_info, outliney[i], outlinex[i]);
-              if (!gcolor_equal(temp_pixel, outline->orig_color)) {
-                #ifdef PBL_COLOR
-                   set_pixel(bitmap_info, outliney[i], outlinex[i], outline->offset_color.argb);  
-                #else
-                   set_pixel(bitmap_info, outliney[i], outlinex[i], gcolor_equal(outline->offset_color, GColorWhite)? 1 : 0);
-                #endif
+            for (int i = 0; i < 4; i++) {
+              // TODO: centralize the constants
+              if (outlinex[i] >= 0 && outlinex[i] <=144 && outliney[i] >= 0 && outliney[i] <= 168) {
+                temp_pixel = (GColor)get_pixel(bitmap_info, outliney[i], outlinex[i]);
+                if (!gcolor_equal(temp_pixel, outline->orig_color)) {
+                  #ifdef PBL_COLOR
+                    set_pixel(bitmap_info, outliney[i], outlinex[i], outline->offset_color.argb);  
+                  #else
+                    set_pixel(bitmap_info, outliney[i], outlinex[i], gcolor_equal(outline->offset_color, GColorWhite)? 1 : 0);
+                  #endif
+                }
               }
             }
           }
-       }
-  }
+        }
+    }
 
   graphics_release_frame_buffer(ctx, fb);
 }
