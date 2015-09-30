@@ -5,12 +5,11 @@
   
 // { ********* Graphics utility functions (probablu should be seaparated into anothe file?) *********
   
-   
-
+  
 // set pixel color at given coordinates 
 void set_pixel(BitmapInfo bitmap_info, int y, int x, uint8_t color) {
   
-#ifdef PBL_PLATFORM_BASALT  
+#ifndef PBL_PLATFORM_APLITE  
   if (bitmap_info.bitmap_format == GBitmapFormat1BitPalette) { // for 1bit palette bitmap on Basalt --- verify if it needs to be different
      bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x / 8] ^= (-color ^ bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x / 8]) & (1 << (x % 8)); 
 #else
@@ -18,7 +17,13 @@ void set_pixel(BitmapInfo bitmap_info, int y, int x, uint8_t color) {
      bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x / 8] ^= (-color ^ bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x / 8]) & (1 << (x % 8)); 
 #endif
   } else { // othersise (assuming GBitmapFormat8Bit) going byte-wise
-     bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x] = color;
+      
+     #ifndef PBL_PLATFORM_CHALK
+       bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x] = color;
+     #else
+       gbitmap_get_data_row_info(bitmap_info.bitmap, y).data[x] = color;
+     #endif  
+  
   }
       
 }
@@ -26,7 +31,7 @@ void set_pixel(BitmapInfo bitmap_info, int y, int x, uint8_t color) {
 // get pixel color at given coordinates 
 uint8_t get_pixel(BitmapInfo bitmap_info, int y, int x) {
 
-#ifdef PBL_PLATFORM_BASALT  
+#ifndef PBL_PLATFORM_APLITE  
   if (bitmap_info.bitmap_format == GBitmapFormat1BitPalette) { // for 1bit palette bitmap on Basalt shifting left to get correct bit
     return (bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x / 8] << (x % 8)) & 128;
 #else
@@ -34,10 +39,16 @@ uint8_t get_pixel(BitmapInfo bitmap_info, int y, int x) {
     return (bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x / 8] >> (x % 8)) & 1;
 #endif
   } else {  // othersise (assuming GBitmapFormat8Bit) going byte-wise
-    return bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x]; 
+    
+    #ifndef PBL_PLATFORM_CHALK
+       return bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x]; 
+     #else
+       return gbitmap_get_data_row_info(bitmap_info.bitmap, y).data[x]; 
+     #endif  
   }
   
-}
+}  
+  
 
 // converts color between 1bit and 8bit palettes (for GBitmapFormat1BitPalette assuming black & white)
 uint8_t PalColor(uint8_t in_color, GBitmapFormat in_format, GBitmapFormat out_format) {
@@ -171,6 +182,7 @@ void effect_invert(GContext* ctx,  GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -196,6 +208,7 @@ void effect_colorize(GContext* ctx,  GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -223,6 +236,7 @@ void effect_colorswap(GContext* ctx,  GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
  
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -249,6 +263,7 @@ void effect_invert_bw_only(GContext* ctx,  GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -282,6 +297,7 @@ void effect_invert_brightness(GContext* ctx,  GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
  
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -441,6 +457,7 @@ void effect_mirror_vertical(GContext* ctx, GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -464,6 +481,7 @@ void effect_mirror_horizontal(GContext* ctx, GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -487,6 +505,7 @@ void effect_rotate_90_degrees(GContext* ctx,  GRect position, void* param){
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -528,6 +547,7 @@ void effect_zoom(GContext* ctx,  GRect position, void* param){
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -563,6 +583,7 @@ void effect_lens(GContext* ctx,  GRect position, void* param){
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -617,12 +638,14 @@ void effect_mask(GContext* ctx, GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
   
   //capturing background bitmap
   BitmapInfo bg_bitmap_info;
+  bg_bitmap_info.bitmap = mask->bitmap_background;
   bg_bitmap_info.bitmap_data =  gbitmap_get_data(mask->bitmap_background);
   bg_bitmap_info.bytes_per_row =  gbitmap_get_bytes_per_row(mask->bitmap_background);
   bg_bitmap_info.bitmap_format = gbitmap_get_format(mask->bitmap_background);
@@ -630,8 +653,8 @@ void effect_mask(GContext* ctx, GRect position, void* param) {
   //looping throughout layer replacing mask with bg bitmap
   for (int y = 0; y < position.size.h; y++)
      for (int x = 0; x < position.size.w; x++) {
-       temp_pixel = (GColor)get_pixel(bitmap_info, y + position.origin.y, x + position.origin.x);
-       if (gcolor_contains(mask->mask_colors, temp_pixel)) { // if array of mask colors matches current screen pixel color:
+      temp_pixel = (GColor)get_pixel(bitmap_info, y + position.origin.y, x + position.origin.x);
+       if ( gcolor_contains(mask->mask_colors, temp_pixel)) { // if array of mask colors matches current screen pixel color:
          // getting pixel from background bitmap (adjusted to pallette by PalColor function because palette of bg bitmap and framebuffer may differ)
          set_pixel(bitmap_info, y + position.origin.y, x + position.origin.x, PalColor(get_pixel(bg_bitmap_info, y + position.origin.y, x + position.origin.x), bg_bitmap_info.bitmap_format, bitmap_info.bitmap_format));
        } 
@@ -680,6 +703,7 @@ void effect_shadow(GContext* ctx, GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
@@ -735,6 +759,7 @@ void effect_outline(GContext* ctx, GRect position, void* param) {
   GBitmap *fb = graphics_capture_frame_buffer(ctx);
   
   BitmapInfo bitmap_info;
+  bitmap_info.bitmap = fb;
   bitmap_info.bitmap_data =  gbitmap_get_data(fb);
   bitmap_info.bytes_per_row = gbitmap_get_bytes_per_row(fb);
   bitmap_info.bitmap_format = gbitmap_get_format(fb);
