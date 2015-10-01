@@ -21,7 +21,8 @@ void set_pixel(BitmapInfo bitmap_info, int y, int x, uint8_t color) {
      #ifndef PBL_PLATFORM_CHALK
        bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x] = color;
      #else
-       gbitmap_get_data_row_info(bitmap_info.bitmap, y).data[x] = color;
+       GBitmapDataRowInfo info = gbitmap_get_data_row_info(bitmap_info.bitmap, y);
+       if ((x >= info.min_x) && (x <= info.max_x)) info.data[x] = color;
      #endif  
   
   }
@@ -43,7 +44,11 @@ uint8_t get_pixel(BitmapInfo bitmap_info, int y, int x) {
     #ifndef PBL_PLATFORM_CHALK
        return bitmap_info.bitmap_data[y*bitmap_info.bytes_per_row + x]; 
      #else
-       return gbitmap_get_data_row_info(bitmap_info.bitmap, y).data[x]; 
+       GBitmapDataRowInfo info = gbitmap_get_data_row_info(bitmap_info.bitmap, y);
+       if ((x >= info.min_x) && (x <= info.max_x))
+         return info.data[x];
+       else 
+         return -1;
      #endif  
   }
   
@@ -70,6 +75,8 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
   bool yLonger = false; int shortLen=y2-y; int longLen=x2-x;
   uint8_t temp_pixel;  int temp_x, temp_y;
   
+  GRect bounds = gbitmap_get_bounds(bitmap_info.bitmap);
+  
   if (abs(shortLen)>abs(longLen)) {
     int swap=shortLen;
     shortLen=longLen; longLen=swap; yLonger=true;
@@ -84,7 +91,7 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
       longLen+=y;
       for (int j=0x80+(x<<8);y<=longLen;++y) {
         temp_y = y; temp_x = j >> 8;
-        if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
+        if (temp_y >=bounds.origin.y && temp_y<bounds.size.h && temp_x >=bounds.origin.x && temp_x < bounds.size.w) {
           temp_pixel = get_pixel(bitmap_info,  temp_y, temp_x);
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
@@ -103,7 +110,7 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
     longLen+=y;
     for (int j=0x80+(x<<8);y>=longLen;--y) {
       temp_y = y; temp_x = j >> 8;
-      if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
+      if (temp_y >=bounds.origin.y && temp_y<bounds.size.h && temp_x >=bounds.origin.x && temp_x < bounds.size.w) {
         temp_pixel = get_pixel(bitmap_info,  temp_y, temp_x);
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
@@ -124,7 +131,7 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
     longLen+=x;
     for (int j=0x80+(y<<8);x<=longLen;++x) {
       temp_y = j >> 8; temp_x =  x;
-      if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
+      if (temp_y >=bounds.origin.y && temp_y<bounds.size.h && temp_x >=bounds.origin.x && temp_x < bounds.size.w) {
         temp_pixel = get_pixel(bitmap_info, temp_y, temp_x);
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
@@ -143,7 +150,7 @@ void set_line(BitmapInfo bitmap_info, int y, int x, int y2, int x2, uint8_t draw
   longLen+=x;
   for (int j=0x80+(y<<8);x>=longLen;--x) {
     temp_y = j >> 8; temp_x =  x;
-    if (temp_y >=0 && temp_y<168 && temp_x >=0 && temp_x < 144) {
+    if (temp_y >=bounds.origin.y && temp_y<bounds.size.h && temp_x >=bounds.origin.x && temp_x < bounds.size.w) {
       temp_pixel = get_pixel(bitmap_info, temp_y, temp_x);
           #ifdef PBL_COLOR // for Basalt drawing pixel if it is not of original color or already drawn color
             if (temp_pixel != skip_color && temp_pixel != draw_color) set_pixel(bitmap_info, temp_y, temp_x, draw_color);
