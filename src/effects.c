@@ -58,9 +58,11 @@ uint8_t get_pixel(BitmapInfo bitmap_info, int y, int x) {
 // converts color between 1bit and 8bit palettes (for GBitmapFormat1BitPalette assuming black & white)
 uint8_t PalColor(uint8_t in_color, GBitmapFormat in_format, GBitmapFormat out_format) {
   
-  if ((in_format == 0 || in_format == 2) && out_format == 1) { // converting  GBitmapFormat1Bit or GBitmapFormat1BitPalette to GBitmapFormat8Bit
+  // APP_LOG(APP_LOG_LEVEL_DEBUG, "IN = %d, OUT = %d", in_format, out_format);
+ 
+  if ((in_format == 0 || in_format == 2) && (out_format == 1 || out_format == 5)) { // converting  GBitmapFormat1Bit or GBitmapFormat1BitPalette to GBitmapFormat8Bit or GBitmapFormatCircular
      return in_color == 0? 192 : 255;
-  } else if (in_format == 1 && (out_format == 0 || out_format == 2) ) { // converting GBitmapFormat8Bit to GBitmapFormat1Bit or GBitmapFormat1BitPalette 
+  } else if ((in_format == 1 || in_format == 5) && (out_format == 0 || out_format == 2) ) { // converting GBitmapFormat8Bit or GBitmapFormatCircular to GBitmapFormat1Bit or GBitmapFormat1BitPalette 
      return in_color == 255? 1 : 0;  // for now converting white to white, the rest to black
   } else {
     return in_color;

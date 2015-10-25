@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <pebble.h>  
 
 // used to pass bimap info to get/set pixel accurately  
