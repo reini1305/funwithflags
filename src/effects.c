@@ -665,8 +665,10 @@ void effect_mask(GContext* ctx, GRect position, void* param) {
       temp_pixel = (GColor)get_pixel(bitmap_info, y + position.origin.y, x + position.origin.x);
        if ( gcolor_contains(mask->mask_colors, temp_pixel)) { // if array of mask colors matches current screen pixel color:
          // getting pixel from background bitmap (adjusted to pallette by PalColor function because palette of bg bitmap and framebuffer may differ)
-         set_pixel(bitmap_info, y + position.origin.y, x + position.origin.x, PalColor(get_pixel(bg_bitmap_info, y + position.origin.y, x + position.origin.x), bg_bitmap_info.bitmap_format, bitmap_info.bitmap_format));
+         // YG OCT-25-2015: replaced "y + position.origin.y, x + position.origin.x" with "y + 0, x + 0" since in mask bitmap we start without offset
+         set_pixel(bitmap_info, y + position.origin.y, x + position.origin.x, PalColor(get_pixel(bg_bitmap_info, y + 0, x + 0), bg_bitmap_info.bitmap_format, bitmap_info.bitmap_format));
        } 
+  
   }
   
   graphics_release_frame_buffer(ctx, fb);
