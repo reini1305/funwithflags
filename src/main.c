@@ -8,7 +8,6 @@ PropertyAnimation *anim;
 EffectLayer* effect_layer;
 EffectMask mask;
 
-
 GRect anim_finish[4] = {{{75,2}, {68,80}}, {{75,87}, {68,80}}, {{2,87}, {68,80}}, {{2,2},{68,80}}};
 int anim_count = -1;
 
@@ -120,6 +119,9 @@ void handle_init(void) {
   
   // adding mask effect
   effect_layer_add_effect(effect_layer, effect_mask, &mask);
+
+  
+  effect_layer_add_effect(effect_layer, effect_blur, (void*)3);
 
   
   layer_add_child(window_get_root_layer(my_window), effect_layer_get_layer(effect_layer));
