@@ -1,0 +1,3 @@
+[submodule "country-flags"]
+	path = country-flags
+	url = https://github.com/hjnilsson/country-flags.git
