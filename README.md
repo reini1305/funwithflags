@@ -3,7 +3,7 @@ Fun with flags
 
 This is the source repository for the Pebble watchface "Fun with flags"
 
-The app can be found in the store: https://apps.getpebble.com/applications/
+The app can be found in the store: https://apps.getpebble.com/applications/5659b0dc36f882e860000055
 
 <a href='https://pledgie.com/campaigns/28156'><img alt='Click here to lend your support to: Christian Reinbachers Pebble Apps and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/28156.png?skin_name=chrome' border='0' ></a>
 
