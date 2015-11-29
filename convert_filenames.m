@@ -3,7 +3,7 @@
 close all
 clear all
 
-folder_name='flags';
+folder_name='japanese';
 
 files = dir([folder_name filesep '*.png']);
 
@@ -30,7 +30,7 @@ for i=1:numel(files)
     fprintf(namesfile,'{\n"type": "png",\n');
     [~,flagname]=fileparts(files(i).name);
     fprintf(namesfile,'"name": "%s",\n',upper(flagname));
-    fprintf(namesfile,'"file": "%s/%s"\n},\n',folder_name,files(i).name);
+    fprintf(namesfile,'"file": "%s/%s"\n},\n','flags',files(i).name);
     
     fprintf(rmfile,'RESOURCE_ID_%s,',upper(flagname));
     

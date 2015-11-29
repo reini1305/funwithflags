@@ -3,7 +3,7 @@
   "shortName": "Fun with flags",
   "longName": "Fun with flags",
   "companyName": "Christian Reinbacher",
-  "versionLabel": "1.1",
+  "versionLabel": "1.2",
   "sdkVersion": "3",
   "targetPlatforms": ["basalt"],
   "watchapp": {
@@ -14,7 +14,112 @@
   },
   "resources": {
     "media": [
-    {
+{
+"type": "png",
+"name": "AICHI",
+"file": "flags/aichi.png"
+},
+{
+"type": "png",
+"name": "AOMORI",
+"file": "flags/aomori.png"
+},
+{
+"type": "png",
+"name": "EHIME",
+"file": "flags/ehime.png"
+},
+{
+"type": "png",
+"name": "FUKUOKA",
+"file": "flags/fukuoka.png"
+},
+{
+"type": "png",
+"name": "GIFU",
+"file": "flags/gifu.png"
+},
+{
+"type": "png",
+"name": "HIROSHIMA",
+"file": "flags/hiroshima.png"
+},
+{
+"type": "png",
+"name": "HYOGO",
+"file": "flags/hyogo.png"
+},
+{
+"type": "png",
+"name": "ISHIKAWA",
+"file": "flags/ishikawa.png"
+},
+{
+"type": "png",
+"name": "KAGAWA",
+"file": "flags/kagawa.png"
+},
+{
+"type": "png",
+"name": "KARAFUTO",
+"file": "flags/karafuto.png"
+},
+{
+"type": "png",
+"name": "KOCHI",
+"file": "flags/kochi.png"
+},
+{
+"type": "png",
+"name": "KYOTO",
+"file": "flags/kyoto.png"
+},
+{
+"type": "png",
+"name": "MIYAGI",
+"file": "flags/miyagi.png"
+},
+{
+"type": "png",
+"name": "NAGANO",
+"file": "flags/nagano.png"
+},
+{
+"type": "png",
+"name": "NARA",
+"file": "flags/nara.png"
+},
+{
+"type": "png",
+"name": "OITA",
+"file": "flags/oita.png"
+},
+{
+"type": "png",
+"name": "OKAYAMA",
+"file": "flags/okayama.png"
+},
+{
+"type": "png",
+"name": "OSAKA",
+"file": "flags/osaka.png"
+},
+{
+"type": "png",
+"name": "SAITAMA",
+"file": "flags/saitama.png"
+},
+{
+"type": "png",
+"name": "SHIMANE",
+"file": "flags/shimane.png"
+},
+{
+"type": "png",
+"name": "TOKYO",
+"file": "flags/tokyo.png"
+},
+{
 "type": "png",
 "name": "AD",
 "file": "flags/ad.png"

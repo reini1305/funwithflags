@@ -1,7 +1,7 @@
 #include <pebble.h>
 #include "mapping_resource.h"
 #include "mapping_names.h"
-#define NUM_COUNTRIES 235
+#define NUM_COUNTRIES 256
 
 static Window *window;
 static TextLayer *time_layer;
@@ -72,6 +72,7 @@ static void loadWindow(Window *window) {
     text_layer_set_text(text_layer,"bla");
     
     flags_layer = bitmap_layer_create(GRect(0,0,bounds.size.w,bounds.size.h-40));
+    bitmap_layer_set_alignment(flags_layer,GAlignCenter);
 	updateFlag();
 	
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
