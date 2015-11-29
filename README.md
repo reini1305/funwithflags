@@ -1,5 +1,5 @@
-Fun with flags
-==============
+
+<img src="https://github.com/reini1305/funwithflags/raw/master/store/banner.png"></img>
 
 This is the source repository for the Pebble watchface "Fun with flags"
 
