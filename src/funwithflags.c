@@ -12,7 +12,7 @@ static int country_id;
 static AppTimer* show_name_timer=NULL;
 
 static void updateFlag() {	
-	country_id = (rand()%(NUM_COUNTRIES/2) + rand()%(NUM_COUNTRIES/2+1)+1)%NUM_COUNTRIES;
+	country_id = (country_id+1)%NUM_COUNTRIES;
 	if(flag_bitmap)
 		gbitmap_destroy(flag_bitmap);
 	flag_bitmap = gbitmap_create_with_resource(resource_names[country_id]);
@@ -94,9 +94,9 @@ static void unloadWindow(Window *window) {
 
 
 static void init() {
-	srand(time(NULL));
-	flag_bitmap=NULL;
-	country_id = rand()%NUM_COUNTRIES;
+	  srand(time(NULL));
+	  flag_bitmap=NULL;
+	  country_id = rand()%NUM_COUNTRIES;
     window = window_create();
 
     window_set_window_handlers(window, (WindowHandlers) {
