@@ -17,3 +17,4 @@ The app can be found in the store: https://apps.getpebble.com/applications/5659b
 - 235 countries
 - new flag every minute
 - flick your watch to show the corresponding country name
+
