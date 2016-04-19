@@ -4,6 +4,13 @@
 #include "nightstand.h"
 
 #define NUM_COUNTRIES 256
+#ifdef PBL_ROUND
+#define OFFSET_TOP 5
+#define OFFSET_BOTTOM 55
+#else
+#define OFFSET_TOP 0
+#define OFFSET_BOTTOM 40
+#endif
 
 static Window *window;
 static TextLayer *time_layer;
@@ -64,21 +71,21 @@ static void loadWindow(Window *window) {
   GRect bounds = layer_get_bounds(window_get_root_layer(window));
   window_set_background_color(window,GColorBlack);
 
-  time_layer = text_layer_create(GRect(0, bounds.size.h-40, bounds.size.w, 40));
+  time_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
   text_layer_set_background_color(time_layer, GColorBlack);
   text_layer_set_text_color(time_layer, GColorWhite);
   text_layer_set_font(time_layer, fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
   text_layer_set_text_alignment(time_layer, GTextAlignmentCenter);
   text_layer_set_text(time_layer,time_text);
 
-  text_layer = text_layer_create(GRect(0, bounds.size.h-40, bounds.size.w, 40));
+  text_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
   text_layer_set_background_color(text_layer, GColorBlack);
   text_layer_set_text_color(text_layer, GColorWhite);
   text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
   text_layer_set_text(text_layer,"bla");
   
-  flags_layer = bitmap_layer_create(GRect(0,0,bounds.size.w,bounds.size.h-40));
+  flags_layer = bitmap_layer_create(GRect(0,OFFSET_TOP,bounds.size.w,bounds.size.h-OFFSET_BOTTOM+OFFSET_TOP));
   bitmap_layer_set_alignment(flags_layer,GAlignCenter);
   updateFlag();
   
