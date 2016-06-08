@@ -1,0 +1,1316 @@
+{
+  "version": "1.7.0",
+  "author": "Christian Reinbacher",
+  "private": true,
+  "dependencies": {
+    "nightstand": "^1.0.0"
+  },
+  "keywords": [
+    "pebble-app"
+  ],
+  "pebble": {
+    "sdkVersion": "3",
+    "resources": {
+      "media": [
+        {
+          "type": "png",
+          "name": "AICHI",
+          "file": "flags/aichi.png"
+        },
+        {
+          "type": "png",
+          "name": "AOMORI",
+          "file": "flags/aomori.png"
+        },
+        {
+          "type": "png",
+          "name": "EHIME",
+          "file": "flags/ehime.png"
+        },
+        {
+          "type": "png",
+          "name": "FUKUOKA",
+          "file": "flags/fukuoka.png"
+        },
+        {
+          "type": "png",
+          "name": "GIFU",
+          "file": "flags/gifu.png"
+        },
+        {
+          "type": "png",
+          "name": "HIROSHIMA",
+          "file": "flags/hiroshima.png"
+        },
+        {
+          "type": "png",
+          "name": "HYOGO",
+          "file": "flags/hyogo.png"
+        },
+        {
+          "type": "png",
+          "name": "ISHIKAWA",
+          "file": "flags/ishikawa.png"
+        },
+        {
+          "type": "png",
+          "name": "KAGAWA",
+          "file": "flags/kagawa.png"
+        },
+        {
+          "type": "png",
+          "name": "KARAFUTO",
+          "file": "flags/karafuto.png"
+        },
+        {
+          "type": "png",
+          "name": "KOCHI",
+          "file": "flags/kochi.png"
+        },
+        {
+          "type": "png",
+          "name": "KYOTO",
+          "file": "flags/kyoto.png"
+        },
+        {
+          "type": "png",
+          "name": "MIYAGI",
+          "file": "flags/miyagi.png"
+        },
+        {
+          "type": "png",
+          "name": "NAGANO",
+          "file": "flags/nagano.png"
+        },
+        {
+          "type": "png",
+          "name": "NARA",
+          "file": "flags/nara.png"
+        },
+        {
+          "type": "png",
+          "name": "OITA",
+          "file": "flags/oita.png"
+        },
+        {
+          "type": "png",
+          "name": "OKAYAMA",
+          "file": "flags/okayama.png"
+        },
+        {
+          "type": "png",
+          "name": "OSAKA",
+          "file": "flags/osaka.png"
+        },
+        {
+          "type": "png",
+          "name": "SAITAMA",
+          "file": "flags/saitama.png"
+        },
+        {
+          "type": "png",
+          "name": "SHIMANE",
+          "file": "flags/shimane.png"
+        },
+        {
+          "type": "png",
+          "name": "TOKYO",
+          "file": "flags/tokyo.png"
+        },
+        {
+          "type": "png",
+          "name": "AD",
+          "file": "flags/ad.png"
+        },
+        {
+          "type": "png",
+          "name": "AE",
+          "file": "flags/ae.png"
+        },
+        {
+          "type": "png",
+          "name": "AF",
+          "file": "flags/af.png"
+        },
+        {
+          "type": "png",
+          "name": "AG",
+          "file": "flags/ag.png"
+        },
+        {
+          "type": "png",
+          "name": "AI",
+          "file": "flags/ai.png"
+        },
+        {
+          "type": "png",
+          "name": "AL",
+          "file": "flags/al.png"
+        },
+        {
+          "type": "png",
+          "name": "AM",
+          "file": "flags/am.png"
+        },
+        {
+          "type": "png",
+          "name": "AO",
+          "file": "flags/ao.png"
+        },
+        {
+          "type": "png",
+          "name": "AR",
+          "file": "flags/ar.png"
+        },
+        {
+          "type": "png",
+          "name": "AS",
+          "file": "flags/as.png"
+        },
+        {
+          "type": "png",
+          "name": "AT",
+          "file": "flags/at.png"
+        },
+        {
+          "type": "png",
+          "name": "AU",
+          "file": "flags/au.png"
+        },
+        {
+          "type": "png",
+          "name": "AW",
+          "file": "flags/aw.png"
+        },
+        {
+          "type": "png",
+          "name": "AX",
+          "file": "flags/ax.png"
+        },
+        {
+          "type": "png",
+          "name": "AZ",
+          "file": "flags/az.png"
+        },
+        {
+          "type": "png",
+          "name": "BA",
+          "file": "flags/ba.png"
+        },
+        {
+          "type": "png",
+          "name": "BB",
+          "file": "flags/bb.png"
+        },
+        {
+          "type": "png",
+          "name": "BD",
+          "file": "flags/bd.png"
+        },
+        {
+          "type": "png",
+          "name": "BE",
+          "file": "flags/be.png"
+        },
+        {
+          "type": "png",
+          "name": "BF",
+          "file": "flags/bf.png"
+        },
+        {
+          "type": "png",
+          "name": "BG",
+          "file": "flags/bg.png"
+        },
+        {
+          "type": "png",
+          "name": "BH",
+          "file": "flags/bh.png"
+        },
+        {
+          "type": "png",
+          "name": "BI",
+          "file": "flags/bi.png"
+        },
+        {
+          "type": "png",
+          "name": "BJ",
+          "file": "flags/bj.png"
+        },
+        {
+          "type": "png",
+          "name": "BM",
+          "file": "flags/bm.png"
+        },
+        {
+          "type": "png",
+          "name": "BN",
+          "file": "flags/bn.png"
+        },
+        {
+          "type": "png",
+          "name": "BO",
+          "file": "flags/bo.png"
+        },
+        {
+          "type": "png",
+          "name": "BR",
+          "file": "flags/br.png"
+        },
+        {
+          "type": "png",
+          "name": "BS",
+          "file": "flags/bs.png"
+        },
+        {
+          "type": "png",
+          "name": "BT",
+          "file": "flags/bt.png"
+        },
+        {
+          "type": "png",
+          "name": "BW",
+          "file": "flags/bw.png"
+        },
+        {
+          "type": "png",
+          "name": "BY",
+          "file": "flags/by.png"
+        },
+        {
+          "type": "png",
+          "name": "BZ",
+          "file": "flags/bz.png"
+        },
+        {
+          "type": "png",
+          "name": "CA",
+          "file": "flags/ca.png"
+        },
+        {
+          "type": "png",
+          "name": "CC",
+          "file": "flags/cc.png"
+        },
+        {
+          "type": "png",
+          "name": "CD",
+          "file": "flags/cd.png"
+        },
+        {
+          "type": "png",
+          "name": "CF",
+          "file": "flags/cf.png"
+        },
+        {
+          "type": "png",
+          "name": "CG",
+          "file": "flags/cg.png"
+        },
+        {
+          "type": "png",
+          "name": "CH",
+          "file": "flags/ch.png"
+        },
+        {
+          "type": "png",
+          "name": "CI",
+          "file": "flags/ci.png"
+        },
+        {
+          "type": "png",
+          "name": "CK",
+          "file": "flags/ck.png"
+        },
+        {
+          "type": "png",
+          "name": "CL",
+          "file": "flags/cl.png"
+        },
+        {
+          "type": "png",
+          "name": "CM",
+          "file": "flags/cm.png"
+        },
+        {
+          "type": "png",
+          "name": "CN",
+          "file": "flags/cn.png"
+        },
+        {
+          "type": "png",
+          "name": "CO",
+          "file": "flags/co.png"
+        },
+        {
+          "type": "png",
+          "name": "CR",
+          "file": "flags/cr.png"
+        },
+        {
+          "type": "png",
+          "name": "CU",
+          "file": "flags/cu.png"
+        },
+        {
+          "type": "png",
+          "name": "CV",
+          "file": "flags/cv.png"
+        },
+        {
+          "type": "png",
+          "name": "CW",
+          "file": "flags/cw.png"
+        },
+        {
+          "type": "png",
+          "name": "CX",
+          "file": "flags/cx.png"
+        },
+        {
+          "type": "png",
+          "name": "CY",
+          "file": "flags/cy.png"
+        },
+        {
+          "type": "png",
+          "name": "CZ",
+          "file": "flags/cz.png"
+        },
+        {
+          "type": "png",
+          "name": "DE",
+          "file": "flags/de.png"
+        },
+        {
+          "type": "png",
+          "name": "DJ",
+          "file": "flags/dj.png"
+        },
+        {
+          "type": "png",
+          "name": "DK",
+          "file": "flags/dk.png"
+        },
+        {
+          "type": "png",
+          "name": "DM",
+          "file": "flags/dm.png"
+        },
+        {
+          "type": "png",
+          "name": "DO",
+          "file": "flags/do.png"
+        },
+        {
+          "type": "png",
+          "name": "DZ",
+          "file": "flags/dz.png"
+        },
+        {
+          "type": "png",
+          "name": "EC",
+          "file": "flags/ec.png"
+        },
+        {
+          "type": "png",
+          "name": "EE",
+          "file": "flags/ee.png"
+        },
+        {
+          "type": "png",
+          "name": "EG",
+          "file": "flags/eg.png"
+        },
+        {
+          "type": "png",
+          "name": "ER",
+          "file": "flags/er.png"
+        },
+        {
+          "type": "png",
+          "name": "ES",
+          "file": "flags/es.png"
+        },
+        {
+          "type": "png",
+          "name": "ET",
+          "file": "flags/et.png"
+        },
+        {
+          "type": "png",
+          "name": "FI",
+          "file": "flags/fi.png"
+        },
+        {
+          "type": "png",
+          "name": "FJ",
+          "file": "flags/fj.png"
+        },
+        {
+          "type": "png",
+          "name": "FK",
+          "file": "flags/fk.png"
+        },
+        {
+          "type": "png",
+          "name": "FM",
+          "file": "flags/fm.png"
+        },
+        {
+          "type": "png",
+          "name": "FO",
+          "file": "flags/fo.png"
+        },
+        {
+          "type": "png",
+          "name": "FR",
+          "file": "flags/fr.png"
+        },
+        {
+          "type": "png",
+          "name": "GA",
+          "file": "flags/ga.png"
+        },
+        {
+          "type": "png",
+          "name": "GB",
+          "file": "flags/gb.png"
+        },
+        {
+          "type": "png",
+          "name": "GD",
+          "file": "flags/gd.png"
+        },
+        {
+          "type": "png",
+          "name": "GE",
+          "file": "flags/ge.png"
+        },
+        {
+          "type": "png",
+          "name": "GG",
+          "file": "flags/gg.png"
+        },
+        {
+          "type": "png",
+          "name": "GH",
+          "file": "flags/gh.png"
+        },
+        {
+          "type": "png",
+          "name": "GI",
+          "file": "flags/gi.png"
+        },
+        {
+          "type": "png",
+          "name": "GL",
+          "file": "flags/gl.png"
+        },
+        {
+          "type": "png",
+          "name": "GM",
+          "file": "flags/gm.png"
+        },
+        {
+          "type": "png",
+          "name": "GN",
+          "file": "flags/gn.png"
+        },
+        {
+          "type": "png",
+          "name": "GQ",
+          "file": "flags/gq.png"
+        },
+        {
+          "type": "png",
+          "name": "GR",
+          "file": "flags/gr.png"
+        },
+        {
+          "type": "png",
+          "name": "GS",
+          "file": "flags/gs.png"
+        },
+        {
+          "type": "png",
+          "name": "GT",
+          "file": "flags/gt.png"
+        },
+        {
+          "type": "png",
+          "name": "GU",
+          "file": "flags/gu.png"
+        },
+        {
+          "type": "png",
+          "name": "GW",
+          "file": "flags/gw.png"
+        },
+        {
+          "type": "png",
+          "name": "GY",
+          "file": "flags/gy.png"
+        },
+        {
+          "type": "png",
+          "name": "HK",
+          "file": "flags/hk.png"
+        },
+        {
+          "type": "png",
+          "name": "HN",
+          "file": "flags/hn.png"
+        },
+        {
+          "type": "png",
+          "name": "HR",
+          "file": "flags/hr.png"
+        },
+        {
+          "type": "png",
+          "name": "HT",
+          "file": "flags/ht.png"
+        },
+        {
+          "type": "png",
+          "name": "HU",
+          "file": "flags/hu.png"
+        },
+        {
+          "type": "png",
+          "name": "ID",
+          "file": "flags/id.png"
+        },
+        {
+          "type": "png",
+          "name": "IE",
+          "file": "flags/ie.png"
+        },
+        {
+          "type": "png",
+          "name": "IL",
+          "file": "flags/il.png"
+        },
+        {
+          "type": "png",
+          "name": "IM",
+          "file": "flags/im.png"
+        },
+        {
+          "type": "png",
+          "name": "IN",
+          "file": "flags/in.png"
+        },
+        {
+          "type": "png",
+          "name": "IO",
+          "file": "flags/io.png"
+        },
+        {
+          "type": "png",
+          "name": "IQ",
+          "file": "flags/iq.png"
+        },
+        {
+          "type": "png",
+          "name": "IR",
+          "file": "flags/ir.png"
+        },
+        {
+          "type": "png",
+          "name": "IS",
+          "file": "flags/is.png"
+        },
+        {
+          "type": "png",
+          "name": "IT",
+          "file": "flags/it.png"
+        },
+        {
+          "type": "png",
+          "name": "JE",
+          "file": "flags/je.png"
+        },
+        {
+          "type": "png",
+          "name": "JM",
+          "file": "flags/jm.png"
+        },
+        {
+          "type": "png",
+          "name": "JO",
+          "file": "flags/jo.png"
+        },
+        {
+          "type": "png",
+          "name": "JP",
+          "file": "flags/jp.png"
+        },
+        {
+          "type": "png",
+          "name": "KE",
+          "file": "flags/ke.png"
+        },
+        {
+          "type": "png",
+          "name": "KG",
+          "file": "flags/kg.png"
+        },
+        {
+          "type": "png",
+          "name": "KH",
+          "file": "flags/kh.png"
+        },
+        {
+          "type": "png",
+          "name": "KI",
+          "file": "flags/ki.png"
+        },
+        {
+          "type": "png",
+          "name": "KM",
+          "file": "flags/km.png"
+        },
+        {
+          "type": "png",
+          "name": "KN",
+          "file": "flags/kn.png"
+        },
+        {
+          "type": "png",
+          "name": "KP",
+          "file": "flags/kp.png"
+        },
+        {
+          "type": "png",
+          "name": "KR",
+          "file": "flags/kr.png"
+        },
+        {
+          "type": "png",
+          "name": "KW",
+          "file": "flags/kw.png"
+        },
+        {
+          "type": "png",
+          "name": "KY",
+          "file": "flags/ky.png"
+        },
+        {
+          "type": "png",
+          "name": "KZ",
+          "file": "flags/kz.png"
+        },
+        {
+          "type": "png",
+          "name": "LA",
+          "file": "flags/la.png"
+        },
+        {
+          "type": "png",
+          "name": "LB",
+          "file": "flags/lb.png"
+        },
+        {
+          "type": "png",
+          "name": "LC",
+          "file": "flags/lc.png"
+        },
+        {
+          "type": "png",
+          "name": "LI",
+          "file": "flags/li.png"
+        },
+        {
+          "type": "png",
+          "name": "LK",
+          "file": "flags/lk.png"
+        },
+        {
+          "type": "png",
+          "name": "LR",
+          "file": "flags/lr.png"
+        },
+        {
+          "type": "png",
+          "name": "LS",
+          "file": "flags/ls.png"
+        },
+        {
+          "type": "png",
+          "name": "LT",
+          "file": "flags/lt.png"
+        },
+        {
+          "type": "png",
+          "name": "LU",
+          "file": "flags/lu.png"
+        },
+        {
+          "type": "png",
+          "name": "LV",
+          "file": "flags/lv.png"
+        },
+        {
+          "type": "png",
+          "name": "LY",
+          "file": "flags/ly.png"
+        },
+        {
+          "type": "png",
+          "name": "MA",
+          "file": "flags/ma.png"
+        },
+        {
+          "type": "png",
+          "name": "MC",
+          "file": "flags/mc.png"
+        },
+        {
+          "type": "png",
+          "name": "MD",
+          "file": "flags/md.png"
+        },
+        {
+          "type": "png",
+          "name": "ME",
+          "file": "flags/me.png"
+        },
+        {
+          "type": "png",
+          "name": "MG",
+          "file": "flags/mg.png"
+        },
+        {
+          "type": "png",
+          "name": "MH",
+          "file": "flags/mh.png"
+        },
+        {
+          "type": "png",
+          "name": "MK",
+          "file": "flags/mk.png"
+        },
+        {
+          "type": "png",
+          "name": "ML",
+          "file": "flags/ml.png"
+        },
+        {
+          "type": "png",
+          "name": "MM",
+          "file": "flags/mm.png"
+        },
+        {
+          "type": "png",
+          "name": "MN",
+          "file": "flags/mn.png"
+        },
+        {
+          "type": "png",
+          "name": "MO",
+          "file": "flags/mo.png"
+        },
+        {
+          "type": "png",
+          "name": "MP",
+          "file": "flags/mp.png"
+        },
+        {
+          "type": "png",
+          "name": "MQ",
+          "file": "flags/mq.png"
+        },
+        {
+          "type": "png",
+          "name": "MR",
+          "file": "flags/mr.png"
+        },
+        {
+          "type": "png",
+          "name": "MS",
+          "file": "flags/ms.png"
+        },
+        {
+          "type": "png",
+          "name": "MT",
+          "file": "flags/mt.png"
+        },
+        {
+          "type": "png",
+          "name": "MU",
+          "file": "flags/mu.png"
+        },
+        {
+          "type": "png",
+          "name": "MV",
+          "file": "flags/mv.png"
+        },
+        {
+          "type": "png",
+          "name": "MW",
+          "file": "flags/mw.png"
+        },
+        {
+          "type": "png",
+          "name": "MX",
+          "file": "flags/mx.png"
+        },
+        {
+          "type": "png",
+          "name": "MY",
+          "file": "flags/my.png"
+        },
+        {
+          "type": "png",
+          "name": "MZ",
+          "file": "flags/mz.png"
+        },
+        {
+          "type": "png",
+          "name": "NA",
+          "file": "flags/na.png"
+        },
+        {
+          "type": "png",
+          "name": "NC",
+          "file": "flags/nc.png"
+        },
+        {
+          "type": "png",
+          "name": "NE",
+          "file": "flags/ne.png"
+        },
+        {
+          "type": "png",
+          "name": "NF",
+          "file": "flags/nf.png"
+        },
+        {
+          "type": "png",
+          "name": "NG",
+          "file": "flags/ng.png"
+        },
+        {
+          "type": "png",
+          "name": "NI",
+          "file": "flags/ni.png"
+        },
+        {
+          "type": "png",
+          "name": "NL",
+          "file": "flags/nl.png"
+        },
+        {
+          "type": "png",
+          "name": "NO",
+          "file": "flags/no.png"
+        },
+        {
+          "type": "png",
+          "name": "NP",
+          "file": "flags/np.png"
+        },
+        {
+          "type": "png",
+          "name": "NR",
+          "file": "flags/nr.png"
+        },
+        {
+          "type": "png",
+          "name": "NU",
+          "file": "flags/nu.png"
+        },
+        {
+          "type": "png",
+          "name": "NZ",
+          "file": "flags/nz.png"
+        },
+        {
+          "type": "png",
+          "name": "OM",
+          "file": "flags/om.png"
+        },
+        {
+          "type": "png",
+          "name": "PA",
+          "file": "flags/pa.png"
+        },
+        {
+          "type": "png",
+          "name": "PE",
+          "file": "flags/pe.png"
+        },
+        {
+          "type": "png",
+          "name": "PF",
+          "file": "flags/pf.png"
+        },
+        {
+          "type": "png",
+          "name": "PG",
+          "file": "flags/pg.png"
+        },
+        {
+          "type": "png",
+          "name": "PH",
+          "file": "flags/ph.png"
+        },
+        {
+          "type": "png",
+          "name": "PK",
+          "file": "flags/pk.png"
+        },
+        {
+          "type": "png",
+          "name": "PL",
+          "file": "flags/pl.png"
+        },
+        {
+          "type": "png",
+          "name": "PN",
+          "file": "flags/pn.png"
+        },
+        {
+          "type": "png",
+          "name": "PR",
+          "file": "flags/pr.png"
+        },
+        {
+          "type": "png",
+          "name": "PS",
+          "file": "flags/ps.png"
+        },
+        {
+          "type": "png",
+          "name": "PT",
+          "file": "flags/pt.png"
+        },
+        {
+          "type": "png",
+          "name": "PW",
+          "file": "flags/pw.png"
+        },
+        {
+          "type": "png",
+          "name": "PY",
+          "file": "flags/py.png"
+        },
+        {
+          "type": "png",
+          "name": "QA",
+          "file": "flags/qa.png"
+        },
+        {
+          "type": "png",
+          "name": "RE",
+          "file": "flags/re.png"
+        },
+        {
+          "type": "png",
+          "name": "RO",
+          "file": "flags/ro.png"
+        },
+        {
+          "type": "png",
+          "name": "RS",
+          "file": "flags/rs.png"
+        },
+        {
+          "type": "png",
+          "name": "RU",
+          "file": "flags/ru.png"
+        },
+        {
+          "type": "png",
+          "name": "RW",
+          "file": "flags/rw.png"
+        },
+        {
+          "type": "png",
+          "name": "SA",
+          "file": "flags/sa.png"
+        },
+        {
+          "type": "png",
+          "name": "SB",
+          "file": "flags/sb.png"
+        },
+        {
+          "type": "png",
+          "name": "SC",
+          "file": "flags/sc.png"
+        },
+        {
+          "type": "png",
+          "name": "SD",
+          "file": "flags/sd.png"
+        },
+        {
+          "type": "png",
+          "name": "SE",
+          "file": "flags/se.png"
+        },
+        {
+          "type": "png",
+          "name": "SG",
+          "file": "flags/sg.png"
+        },
+        {
+          "type": "png",
+          "name": "SH",
+          "file": "flags/sh.png"
+        },
+        {
+          "type": "png",
+          "name": "SI",
+          "file": "flags/si.png"
+        },
+        {
+          "type": "png",
+          "name": "SK",
+          "file": "flags/sk.png"
+        },
+        {
+          "type": "png",
+          "name": "SL",
+          "file": "flags/sl.png"
+        },
+        {
+          "type": "png",
+          "name": "SM",
+          "file": "flags/sm.png"
+        },
+        {
+          "type": "png",
+          "name": "SN",
+          "file": "flags/sn.png"
+        },
+        {
+          "type": "png",
+          "name": "SO",
+          "file": "flags/so.png"
+        },
+        {
+          "type": "png",
+          "name": "SR",
+          "file": "flags/sr.png"
+        },
+        {
+          "type": "png",
+          "name": "SS",
+          "file": "flags/ss.png"
+        },
+        {
+          "type": "png",
+          "name": "ST",
+          "file": "flags/st.png"
+        },
+        {
+          "type": "png",
+          "name": "SV",
+          "file": "flags/sv.png"
+        },
+        {
+          "type": "png",
+          "name": "SX",
+          "file": "flags/sx.png"
+        },
+        {
+          "type": "png",
+          "name": "SY",
+          "file": "flags/sy.png"
+        },
+        {
+          "type": "png",
+          "name": "SZ",
+          "file": "flags/sz.png"
+        },
+        {
+          "type": "png",
+          "name": "TC",
+          "file": "flags/tc.png"
+        },
+        {
+          "type": "png",
+          "name": "TD",
+          "file": "flags/td.png"
+        },
+        {
+          "type": "png",
+          "name": "TF",
+          "file": "flags/tf.png"
+        },
+        {
+          "type": "png",
+          "name": "TG",
+          "file": "flags/tg.png"
+        },
+        {
+          "type": "png",
+          "name": "TH",
+          "file": "flags/th.png"
+        },
+        {
+          "type": "png",
+          "name": "TJ",
+          "file": "flags/tj.png"
+        },
+        {
+          "type": "png",
+          "name": "TK",
+          "file": "flags/tk.png"
+        },
+        {
+          "type": "png",
+          "name": "TL",
+          "file": "flags/tl.png"
+        },
+        {
+          "type": "png",
+          "name": "TM",
+          "file": "flags/tm.png"
+        },
+        {
+          "type": "png",
+          "name": "TN",
+          "file": "flags/tn.png"
+        },
+        {
+          "type": "png",
+          "name": "TO",
+          "file": "flags/to.png"
+        },
+        {
+          "type": "png",
+          "name": "TR",
+          "file": "flags/tr.png"
+        },
+        {
+          "type": "png",
+          "name": "TT",
+          "file": "flags/tt.png"
+        },
+        {
+          "type": "png",
+          "name": "TV",
+          "file": "flags/tv.png"
+        },
+        {
+          "type": "png",
+          "name": "TW",
+          "file": "flags/tw.png"
+        },
+        {
+          "type": "png",
+          "name": "TZ",
+          "file": "flags/tz.png"
+        },
+        {
+          "type": "png",
+          "name": "UA",
+          "file": "flags/ua.png"
+        },
+        {
+          "type": "png",
+          "name": "UG",
+          "file": "flags/ug.png"
+        },
+        {
+          "type": "png",
+          "name": "US",
+          "file": "flags/us.png"
+        },
+        {
+          "type": "png",
+          "name": "UY",
+          "file": "flags/uy.png"
+        },
+        {
+          "type": "png",
+          "name": "UZ",
+          "file": "flags/uz.png"
+        },
+        {
+          "type": "png",
+          "name": "VA",
+          "file": "flags/va.png"
+        },
+        {
+          "type": "png",
+          "name": "VC",
+          "file": "flags/vc.png"
+        },
+        {
+          "type": "png",
+          "name": "VE",
+          "file": "flags/ve.png"
+        },
+        {
+          "type": "png",
+          "name": "VG",
+          "file": "flags/vg.png"
+        },
+        {
+          "type": "png",
+          "name": "VI",
+          "file": "flags/vi.png"
+        },
+        {
+          "type": "png",
+          "name": "VN",
+          "file": "flags/vn.png"
+        },
+        {
+          "type": "png",
+          "name": "VU",
+          "file": "flags/vu.png"
+        },
+        {
+          "type": "png",
+          "name": "WS",
+          "file": "flags/ws.png"
+        },
+        {
+          "type": "png",
+          "name": "YE",
+          "file": "flags/ye.png"
+        },
+        {
+          "type": "png",
+          "name": "ZA",
+          "file": "flags/za.png"
+        },
+        {
+          "type": "png",
+          "name": "ZM",
+          "file": "flags/zm.png"
+        },
+        {
+          "type": "png",
+          "name": "ZW",
+          "file": "flags/zw.png"
+        }
+      ]
+    },
+    "projectType": "native",
+    "uuid": "11b5590e-476b-40f3-9900-b6fb41cdc93f",
+    "messageKeys": {
+      "dummy": 0
+    },
+    "enableMultiJS": false,
+    "displayName": "Fun with flags",
+    "watchapp": {
+      "onlyShownOnCommunication": false,
+      "hiddenApp": false,
+      "watchface": true
+    },
+    "targetPlatforms": [
+      "basalt",
+      "chalk"
+    ],
+    "capabilities": []
+  },
+  "name": "Fun with flags"
+}

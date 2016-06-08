@@ -1,7 +1,8 @@
 #include <pebble.h>
 #include "mapping_resource.h"
 #include "mapping_names.h"
-#include "nightstand.h"
+#include <nightstand/nightstand.h>
+
 
 #define NUM_COUNTRIES 256
 #ifdef PBL_ROUND
