@@ -21,8 +21,20 @@ static GBitmap* flag_bitmap;
 static int country_id;
 static AppTimer* show_name_timer=NULL;
 static char time_text[] = "00:00";
+static GRect s_current_viewing_area;
 
-static void updateFlag() {	
+void unobstructed_will_change(GRect final_rect,void* data) {
+  s_current_viewing_area = final_rect;
+}
+
+void unobstructed_did_change(void* data) {
+  // update layer positions
+  layer_set_frame(text_layer_get_layer(text_layer),GRect(0, s_current_viewing_area.size.h-OFFSET_BOTTOM, s_current_viewing_area.size.w, 40));
+  layer_set_frame(text_layer_get_layer(time_layer),GRect(0, s_current_viewing_area.size.h-OFFSET_BOTTOM, s_current_viewing_area.size.w, 40));
+  layer_set_frame(bitmap_layer_get_layer(flags_layer),GRect(0,OFFSET_TOP,s_current_viewing_area.size.w,s_current_viewing_area.size.h-OFFSET_BOTTOM+OFFSET_TOP));
+}
+
+static void updateFlag() {
 	country_id = (country_id+1)%NUM_COUNTRIES;
 	if(flag_bitmap)
 		gbitmap_destroy(flag_bitmap);
@@ -30,7 +42,6 @@ static void updateFlag() {
 	bitmap_layer_set_bitmap(flags_layer,flag_bitmap);
 	text_layer_set_text(text_layer, country_names[country_id]);
 }
-
 
 void hide_name(void* data) {
   layer_set_hidden(text_layer_get_layer(text_layer),true);
@@ -59,7 +70,7 @@ static void tickHandler(struct tm *tick_time, TimeUnits units) {
   if (!clock_is_24h_style() && (time_text[0] == '0')) {
     memmove(time_text, &time_text[1], sizeof(time_text) - 1);
   }
-  
+
   if(!nightstand_window_update()) {
     updateFlag();
     layer_mark_dirty(text_layer_get_layer(time_layer));
@@ -69,7 +80,8 @@ static void tickHandler(struct tm *tick_time, TimeUnits units) {
 }
 
 static void loadWindow(Window *window) {
-  GRect bounds = layer_get_bounds(window_get_root_layer(window));
+  GRect bounds = layer_get_unobstructed_bounds(window_get_root_layer(window));
+  s_current_viewing_area = bounds;
   window_set_background_color(window,GColorBlack);
 
   time_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
@@ -85,22 +97,22 @@ static void loadWindow(Window *window) {
   text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
   text_layer_set_text(text_layer,"bla");
-  
+
   flags_layer = bitmap_layer_create(GRect(0,OFFSET_TOP,bounds.size.w,bounds.size.h-OFFSET_BOTTOM+OFFSET_TOP));
   bitmap_layer_set_alignment(flags_layer,GAlignCenter);
   updateFlag();
-  
+
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(text_layer));
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(flags_layer));
 
-  
+
   layer_set_hidden(text_layer_get_layer(text_layer),true);
   layer_set_hidden(text_layer_get_layer(time_layer),true);
   layer_set_hidden(bitmap_layer_get_layer(flags_layer),true);
-  
+
   accel_tap_service_subscribe(&accel_tap_handler);
-    
+
 }
 
 static void unloadWindow(Window *window) {
@@ -119,6 +131,11 @@ static void init() {
       .unload = unloadWindow
   });
 
+  UnobstructedAreaHandlers handlers = {
+    .will_change = unobstructed_will_change,
+    .did_change = unobstructed_did_change
+  };
+  unobstructed_area_service_subscribe(handlers, NULL);
   window_stack_push(window, true);
 
   tick_timer_service_subscribe(MINUTE_UNIT, tickHandler);
