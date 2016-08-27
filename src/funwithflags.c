@@ -21,22 +21,17 @@ static GBitmap* flag_bitmap;
 static int country_id;
 static AppTimer* show_name_timer=NULL;
 static char time_text[] = "00:00";
-// static GRect s_current_viewing_area;
 
-// void unobstructed_will_change(GRect final_rect,void* data) {
-//   s_current_viewing_area = final_rect;
+// void unobstructed_change(AnimationProgress progress, void* data) {
+//   GRect bounds = layer_get_unobstructed_bounds(window_get_root_layer(window));
+//   // update layer positions
+//   layer_set_frame(text_layer_get_layer(text_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
+//   layer_set_frame(text_layer_get_layer(time_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
+//   layer_set_frame(bitmap_layer_get_layer(flags_layer),GRect(0,OFFSET_TOP,bounds.size.w,bounds.size.h-OFFSET_BOTTOM+OFFSET_TOP));
 // }
 
-void unobstructed_change(AnimationProgress progress, void* data) {
-  GRect bounds = layer_get_unobstructed_bounds(window_get_root_layer(window));
-  // update layer positions
-  layer_set_frame(text_layer_get_layer(text_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
-  layer_set_frame(text_layer_get_layer(time_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
-  layer_set_frame(bitmap_layer_get_layer(flags_layer),GRect(0,OFFSET_TOP,bounds.size.w,bounds.size.h-OFFSET_BOTTOM+OFFSET_TOP));
-}
-
 static void updateFlag() {
-	country_id = (country_id+1)%NUM_COUNTRIES;
+	country_id = rand()%NUM_COUNTRIES;//(country_id+1)%NUM_COUNTRIES;
 	if(flag_bitmap)
 		gbitmap_destroy(flag_bitmap);
 	flag_bitmap = gbitmap_create_with_resource(resource_names[country_id]);
@@ -51,8 +46,8 @@ void hide_name(void* data) {
 static void accel_tap_handler(AccelAxisType axis, int32_t direction) {
 
   layer_set_hidden(text_layer_get_layer(text_layer),false);
-  if(!app_timer_reschedule(show_name_timer,5000))
-    show_name_timer = app_timer_register(5000,hide_name,NULL);
+  if(!app_timer_reschedule(show_name_timer,2000))
+    show_name_timer = app_timer_register(2000,hide_name,NULL);
 }
 
 static void tickHandler(struct tm *tick_time, TimeUnits units) {
@@ -81,7 +76,7 @@ static void tickHandler(struct tm *tick_time, TimeUnits units) {
 }
 
 static void loadWindow(Window *window) {
-  GRect bounds = layer_get_unobstructed_bounds(window_get_root_layer(window));
+  GRect bounds = layer_get_bounds(window_get_root_layer(window));
   window_set_background_color(window,GColorBlack);
 
   time_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
@@ -131,12 +126,12 @@ static void init() {
       .unload = unloadWindow
   });
 
-  UnobstructedAreaHandlers handlers = {
-    // .will_change = unobstructed_will_change,
-    .change = unobstructed_change
-    // .did_change = unobstructed_did_change
-  };
-  unobstructed_area_service_subscribe(handlers, NULL);
+  // UnobstructedAreaHandlers handlers = {
+  //   // .will_change = unobstructed_will_change,
+  //   .change = unobstructed_change
+  //   // .did_change = unobstructed_did_change
+  // };
+  // unobstructed_area_service_subscribe(handlers, NULL);
   window_stack_push(window, true);
 
   tick_timer_service_subscribe(MINUTE_UNIT, tickHandler);
