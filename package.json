@@ -3,7 +3,7 @@
   "author": "Christian Reinbacher",
   "private": true,
   "dependencies": {
-    "nightstand": "^1.0.4"
+    
   },
   "keywords": [
     "pebble-app"
@@ -1308,7 +1308,8 @@
     },
     "targetPlatforms": [
       "basalt",
-      "chalk"
+      "chalk",
+      "emery"
     ],
     "capabilities": []
   },
