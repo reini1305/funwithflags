@@ -6,11 +6,16 @@
 
 #define NUM_COUNTRIES 256
 #ifdef PBL_ROUND
-#define OFFSET_TOP 5
-#define OFFSET_BOTTOM 55
+  #define OFFSET_TOP 5
+  #define OFFSET_BOTTOM 55
 #else
-#define OFFSET_TOP 0
-#define OFFSET_BOTTOM 40
+  #ifdef PBL_PLATFORM_EMERY
+    #define OFFSET_TOP 0
+    #define OFFSET_BOTTOM 45
+  #else
+    #define OFFSET_TOP 0
+    #define OFFSET_BOTTOM 40
+  #endif
 #endif
 
 static Window *window;
@@ -25,8 +30,8 @@ static char time_text[] = "00:00";
 void unobstructed_change(AnimationProgress progress, void* data) {
   GRect bounds = layer_get_unobstructed_bounds(window_get_root_layer(window));
   // update layer positions
-  layer_set_frame(text_layer_get_layer(text_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
-  layer_set_frame(text_layer_get_layer(time_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
+  layer_set_frame(text_layer_get_layer(text_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 42));
+  layer_set_frame(text_layer_get_layer(time_layer),GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 42));
   layer_set_frame(bitmap_layer_get_layer(flags_layer),GRect(0,OFFSET_TOP,bounds.size.w,bounds.size.h-OFFSET_BOTTOM+OFFSET_TOP));
 }
 
@@ -79,17 +84,25 @@ static void loadWindow(Window *window) {
   GRect bounds = layer_get_unobstructed_bounds(window_get_root_layer(window));
   window_set_background_color(window,GColorBlack);
 
-  time_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
+  time_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 42));
   text_layer_set_background_color(time_layer, GColorBlack);
   text_layer_set_text_color(time_layer, GColorWhite);
+#ifdef PBL_PLATFORM_EMERY
+  text_layer_set_font(time_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
+#else
   text_layer_set_font(time_layer, fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
+#endif
   text_layer_set_text_alignment(time_layer, GTextAlignmentCenter);
   text_layer_set_text(time_layer,time_text);
 
-  text_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 40));
+  text_layer = text_layer_create(GRect(0, bounds.size.h-OFFSET_BOTTOM, bounds.size.w, 42));
   text_layer_set_background_color(text_layer, GColorBlack);
   text_layer_set_text_color(text_layer, GColorWhite);
+#ifdef PBL_PLATFORM_EMERY
+  text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
+#else
   text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+#endif
   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
   text_layer_set_text(text_layer,"bla");
 
