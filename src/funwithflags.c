@@ -1,7 +1,7 @@
 #include <pebble.h>
 #include "mapping_resource.h"
 #include "mapping_names.h"
-//#include <nightstand/nightstand.h>
+#include <nightstand/nightstand.h>
 
 
 #define NUM_COUNTRIES 256
@@ -72,12 +72,12 @@ static void tickHandler(struct tm *tick_time, TimeUnits units) {
     memmove(time_text, &time_text[1], sizeof(time_text) - 1);
   }
 
-  //if(!nightstand_window_update()) {
+  if(!nightstand_window_update()) {
     updateFlag();
     layer_mark_dirty(text_layer_get_layer(time_layer));
     layer_set_hidden(text_layer_get_layer(time_layer),false);
     layer_set_hidden(bitmap_layer_get_layer(flags_layer),false);
-  //}
+  }
 }
 
 static void loadWindow(Window *window) {
@@ -148,7 +148,7 @@ static void init() {
   window_stack_push(window, true);
 
   tick_timer_service_subscribe(MINUTE_UNIT, tickHandler);
-  //nightstand_window_init();
+  nightstand_window_init();
 }
 
 static void deinit() {
